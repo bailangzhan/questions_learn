@@ -1,0 +1,241 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "问答系统API",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:9501",
+            "description": "接口地址-本地"
+        },
+        {
+            "url": "http://dev.XXX.com",
+            "description": "接口地址-测试服"
+        },
+        {
+            "url": "http://prod.XXX.com",
+            "description": "接口地址-正式服"
+        }
+    ],
+    "paths": {
+        "/user/signup": {
+            "post": {
+                "tags": [
+                    "用户相关"
+                ],
+                "summary": "注册",
+                "description": "邮箱注册",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "code",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "code": {
+                                        "description": "邮箱验证码",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "邮箱地址",
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "a@a.com"
+                                    },
+                                    "password": {
+                                        "description": "密码",
+                                        "type": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "确认密码",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "SUCCESS/成功",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "description": "标识",
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "data": {
+                                            "description": "返回数据",
+                                            "properties": {
+                                                "user": {
+                                                    "description": "用户信息",
+                                                    "properties": {
+                                                        "id": {
+                                                            "description": "用户ID",
+                                                            "type": "integer"
+                                                        },
+                                                        "email": {
+                                                            "description": "用户邮箱",
+                                                            "type": "string"
+                                                        },
+                                                        "pic": {
+                                                            "description": "头像地址",
+                                                            "type": "string"
+                                                        },
+                                                        "nickname": {
+                                                            "description": "用户昵称",
+                                                            "type": "string"
+                                                        },
+                                                        "create_time": {
+                                                            "description": "注册时间",
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "token": {
+                                                    "description": "token标识",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "code": 0,
+                                    "data": {
+                                        "user": {
+                                            "id": 1,
+                                            "email": "422744746@qq.com",
+                                            "password": "xxx",
+                                            "pic": "images\\/avatar\\/39.jpg",
+                                            "nickname": "api_951403",
+                                            "create_time": 1669097032
+                                        },
+                                        "token": "xxx"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "用户相关"
+                ],
+                "summary": "登录",
+                "description": "邮箱登录",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "邮箱地址",
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "a@a.com"
+                                    },
+                                    "password": {
+                                        "description": "密码",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "SUCCESS/成功",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "description": "标识",
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "data": {
+                                            "description": "返回数据",
+                                            "properties": {
+                                                "user": {
+                                                    "description": "用户信息",
+                                                    "properties": {
+                                                        "id": {
+                                                            "description": "用户ID",
+                                                            "type": "integer"
+                                                        },
+                                                        "email": {
+                                                            "description": "用户邮箱",
+                                                            "type": "string"
+                                                        },
+                                                        "pic": {
+                                                            "description": "头像地址",
+                                                            "type": "string"
+                                                        },
+                                                        "nickname": {
+                                                            "description": "用户昵称",
+                                                            "type": "string"
+                                                        },
+                                                        "create_time": {
+                                                            "description": "注册时间",
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "token": {
+                                                    "description": "token标识",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "code": 0,
+                                    "data": {
+                                        "user": {
+                                            "id": 1,
+                                            "email": "422744746@qq.com",
+                                            "password": "xxx",
+                                            "pic": "images\\/avatar\\/39.jpg",
+                                            "nickname": "api_951403",
+                                            "create_time": 1669097032
+                                        },
+                                        "token": "xxx"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
