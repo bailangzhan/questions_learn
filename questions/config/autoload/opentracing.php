@@ -89,5 +89,8 @@ return [
         'response' => [
             'status_code' => 'response.status_code',
         ],
+        'params' => [
+            'params' => 'params.params',
+        ],
     ],
 ];

@@ -71,8 +71,7 @@ class Question extends Model
 
         if ($contentFlag && ! empty($array['content_path'])) {
             $adapter = make(FileAdapter::class);
-            $contentUrl = $adapter->privateDownloadUrl($array['content_path']);
-            $array['content'] = $adapter->read($contentUrl);
+            $array['content'] = $adapter->read($array['content_path']);
         }
 
         unset($array['content_path']);

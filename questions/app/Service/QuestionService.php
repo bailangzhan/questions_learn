@@ -181,8 +181,7 @@ class QuestionService extends Service
 
         // content
         $adapter = make(FileAdapter::class);
-        $contentUrl = $adapter->privateDownloadUrl($info['content_path']);
-        $info['content'] = $adapter->read($contentUrl);
+        $info['content'] = $adapter->read($info['content_path']);
 
         $info['views'] = 0;
         $info['answers'] = 0;
