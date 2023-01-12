@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 namespace App\Middleware;
 
+use Hyperf\Context\Context;
 use Hyperf\Contract\TranslatorInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -35,6 +36,12 @@ class GlobalMiddleware implements MiddlewareInterface
         if ($lang = $request->getHeaderLine('lang')) {
             $this->translator->setLocale($lang);
         }
+
+        // trace
+        $span = Context::get('tracer.root');
+        $response = Context::get(ResponseInterface::class);
+        $response = $response->withHeader('Trace-Id', $span->getContext()->getContext()->getTraceId());
+        Context::set(ResponseInterface::class, $response);
 
         return $handler->handle($request);
     }

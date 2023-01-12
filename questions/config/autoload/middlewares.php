@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 return [
     'http' => [
+        \Hyperf\Tracer\Middleware\TraceMiddleware::class,
         \Hyperf\Validation\Middleware\ValidationMiddleware::class, // 验证器
         \App\Middleware\GlobalMiddleware::class, // 全局中间件
     ],
