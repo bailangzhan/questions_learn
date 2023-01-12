@@ -138,6 +138,38 @@ class QuestionService extends Service
         return $questions;
     }
 
+    /**
+     * 热榜.
+     * @return array
+     */
+    public function hotRank()
+    {
+        $redis = make(RedisProxy::class, ['pool' => 'persistence']);
+        $hotQuestions = $redis->zrevrange(KeyConstants::QUESTION_HOT_RANK, 0, 9, true);
+        $hotQuestionIds = array_keys($hotQuestions);
+
+        $result = [];
+        $sort = [];
+        if ($hotQuestionIds) {
+            $questions = Question::query()
+                ->select('id', 'uid', 'title', 'create_time')
+                ->whereIn('id', $hotQuestionIds)
+                ->get()
+                ->toArray();
+            if ($questions) {
+                foreach ($questions as $k => $v) {
+                    $sort[$k] = $v['hot_value'] = $hotQuestions[$v['id']];
+                    $result[] = $v;
+                }
+            }
+        }
+
+        // 按热度排序
+        $sort && array_multisort($sort, SORT_DESC, $result);
+
+        return $result;
+    }
+
     protected function getInfo($id)
     {
         $info = Question::query()->where('id', $id)->select('id', 'uid', 'title', 'content_path', 'create_time')->first();
@@ -176,7 +208,6 @@ class QuestionService extends Service
 
     /**
      * 处理列表数据.
-     * @param $data
      * @return mixed
      */
     protected function listFormatter($data)
@@ -224,37 +255,5 @@ class QuestionService extends Service
         }
 
         return $data;
-    }
-
-    /**
-     * 热榜
-     * @return array
-     */
-    public function hotRank()
-    {
-        $redis = make(RedisProxy::class, ['pool' => 'persistence']);
-        $hotQuestions = $redis->zrevrange(KeyConstants::QUESTION_HOT_RANK, 0, 9, true);
-        $hotQuestionIds = array_keys($hotQuestions);
-
-        $result = [];
-        $sort = [];
-        if ($hotQuestionIds) {
-            $questions = Question::query()
-                ->select('id', 'uid', 'title', 'create_time')
-                ->whereIn('id', $hotQuestionIds)
-                ->get()
-                ->toArray();
-            if ($questions) {
-                foreach ($questions as $k => $v) {
-                    $sort[$k] = $v['hot_value'] = $hotQuestions[$v['id']];
-                    $result[] = $v;
-                }
-            }
-        }
-
-        // 按热度排序
-        $sort && array_multisort($sort, SORT_DESC, $result);
-
-        return $result;
     }
 }
