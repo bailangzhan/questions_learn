@@ -33,6 +33,12 @@ return [
             'options' => [
                 'endpoint_url' => env('ZIPKIN_ENDPOINT_URL', 'http://localhost:9411/api/v2/spans'),
                 'timeout' => env('ZIPKIN_TIMEOUT', 1),
+                'headers' => [
+                    'x-sls-otel-project' => 'question-api',
+                    'x-sls-otel-instance-id' => 'qapi',
+                    'x-sls-otel-ak-id' => 'LTAI5tGbUY6r3ztWh4GqX23P',
+                    'x-sls-otel-ak-secret' => 'SmnQRy6RgLoX757cXLjnwnH8B774zp',
+                ],
             ],
             'sampler' => BinarySampler::createAsAlwaysSample(),
         ],
