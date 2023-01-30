@@ -36,6 +36,7 @@
         "hyperf/redis": "~3.0.0",
         "hyperf/scout": "^3.0",
         "hyperf/swagger": "~3.0.0",
+        "hyperf/swoole-tracker": "^3.0",
         "hyperf/tracer": "^3.0",
         "hyperf/translation": "~3.0.0",
         "hyperf/validation": "~3.0.0",

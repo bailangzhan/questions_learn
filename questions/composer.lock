@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b741356c3d422cbc77d9572825d4a0ab",
+    "content-hash": "d40e57a3be9f889871b9cb903a91e20c",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -3096,6 +3096,61 @@
                 "source": "https://github.com/hyperf/hyperf"
             },
             "time": "2022-08-30T06:33:36+00:00"
+        },
+        {
+            "name": "hyperf/swoole-tracker",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hyperf/swoole-tracker.git",
+                "reference": "e6d6fb60d5d64d452fd33c74785a79ac2be5f6be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hyperf/swoole-tracker/zipball/e6d6fb60d5d64d452fd33c74785a79ac2be5f6be",
+                "reference": "e6d6fb60d5d64d452fd33c74785a79ac2be5f6be",
+                "shasum": ""
+            },
+            "require": {
+                "hyperf/contract": "~3.0.0",
+                "hyperf/utils": "~3.0.0",
+                "php": ">=8.0",
+                "psr/container": "^1.0|^2.0",
+                "psr/http-server-middleware": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                },
+                "hyperf": {
+                    "config": "Hyperf\\SwooleTracker\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hyperf\\SwooleTracker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A swoole tracker library for Hyperf.",
+            "homepage": "https://hyperf.io",
+            "keywords": [
+                "hyperf",
+                "php",
+                "swoole",
+                "swoole-tracker"
+            ],
+            "support": {
+                "docs": "https://hyperf.wiki",
+                "issues": "https://github.com/hyperf/hyperf/issues",
+                "pull-request": "https://github.com/hyperf/hyperf/pulls",
+                "source": "https://github.com/hyperf/hyperf"
+            },
+            "time": "2022-11-01T02:50:54+00:00"
         },
         {
             "name": "hyperf/tracer",
