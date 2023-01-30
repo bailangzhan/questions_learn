@@ -37,13 +37,21 @@ class IndexController extends AbstractController
     #[Inject]
     public UserService $userService;
 
-    public static $a;
+    public static $a = [];
+
+    public $b = [];
 
     public function bus()
     {
-        static::$a[] = ApplicationContext::getContainer()->get(ConfigInterface::class);
+        $this->b[] = str_repeat("'hello world'", 1024);
+
+//        static::$a[] = str_repeat("'hello world'", 1024);
+        var_dump(convert_size(memory_get_usage(true)));
+
         return [
-            'count' => count(static::$a),
+//            'count' => count(static::$a),
+//            'a' => static::$a,
+//            'use' => convert_size(memory_get_usage(true)),
         ];
     }
 
