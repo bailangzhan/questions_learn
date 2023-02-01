@@ -37,68 +37,48 @@ class IndexController extends AbstractController
     #[Inject]
     public UserService $userService;
 
-    public static $a = [];
+    public array $data = [];
 
-    public $b = [];
-
-    public function bus()
+    public function leak()
     {
-        $this->b[] = str_repeat("'hello world'", 1024);
+        $this->data[] = str_repeat("'hello world'", 1024);
 
-//        static::$a[] = str_repeat("'hello world'", 1024);
-        var_dump(convert_size(memory_get_usage(true)));
+//        var_dump(convert_size(memory_get_usage(true)));
 
-        return [
-//            'count' => count(static::$a),
-//            'a' => static::$a,
-//            'use' => convert_size(memory_get_usage(true)),
-        ];
+        return [];
     }
 
     public function info()
     {
-        global $previous;
-        $current = memory_get_usage();
-        $stats = [
-            'prev_mem' => $previous,
-            'curr_mem' => $current,
-            'diff_mem' => $current - $previous,
-        ];
-        $previous = $current;
+        // 如果在协程环境下创建，则会自动使用协程版的 Handler，非协程环境下无改变
+        $builder = $this->container->get(ClientBuilderFactory::class)->create();
 
-        return [
-            'stats' => $stats,
-        ];
+        $client = $builder->setHosts([env('ELASTICSEARCH_HOST')])->build();
 
-//        // 如果在协程环境下创建，则会自动使用协程版的 Handler，非协程环境下无改变
-//        $builder = $this->container->get(ClientBuilderFactory::class)->create();
-//
-//        $client = $builder->setHosts([env('ELASTICSEARCH_HOST')])->build();
-//
-////        $info = $client->info();
-////
-////        $params = [
-////            'index' => 'question',
-////            'type' => '_doc',
-////            'id' => '2'
-////        ];
-////        $qInfo = $client->get($params);
+//        $info = $client->info();
 //
 //        $params = [
 //            'index' => 'question',
 //            'type' => '_doc',
+//            'id' => '2'
 //        ];
-//
-////        $params['body']['query']['bool']['must']['match']['title'] = '第3个';
-////        $params['body']['query']['bool']['filter']['term']['id'] = '2';
-//        $params['body']['query']['bool']['filter']['range']['create_time']['gte'] = '1672901482';
-//        $matchRes = $client->search($params);
-//
-//        return [
-//            //            'info' => $info,
-//            //            'qInfo' => $qInfo,
-//            'matchInfo' => $matchRes,
-//        ];
+//        $qInfo = $client->get($params);
+
+        $params = [
+            'index' => 'question',
+            'type' => '_doc',
+        ];
+
+//        $params['body']['query']['bool']['must']['match']['title'] = '第3个';
+//        $params['body']['query']['bool']['filter']['term']['id'] = '2';
+        $params['body']['query']['bool']['filter']['range']['create_time']['gte'] = '1672901482';
+        $matchRes = $client->search($params);
+
+        return [
+            //            'info' => $info,
+            //            'qInfo' => $qInfo,
+            'matchInfo' => $matchRes,
+        ];
 //
 //
         // //        $adapter = make(FileAdapter::class);

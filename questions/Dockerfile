@@ -6,7 +6,7 @@
 # @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
 
 FROM hyperf/hyperf:8.0-alpine-v3.15-swoole
-LABEL maintainer="Hyperf Developers <group@hyperf.io>" version="1.0" license="MIT" app.name="Hyperf"
+LABEL maintainer="Hyperf Developers <group@hyperf.io>" version="1.0" license="MIT" app.name="api"
 
 ##
 # ---------- env settings ----------
@@ -40,9 +40,19 @@ RUN set -ex \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
     && echo -e "\033[42;37m Build Completed :).\033[0m\n"
 
+
 # swoole tracer 代码
 COPY .build /opt/.build
 WORKDIR /opt/.build
+
+# smem 安装
+RUN wget https://www.selenic.com/smem/download/smem-1.4.tar.gz \
+    && tar zxvf smem-1.4.tar.gz \
+    && cp ./smem-1.4/smem /usr/bin/ \
+    && chmod +x /usr/bin/smem
+
+# python2 安装
+RUN apk add --update --no-cache python2
 
 #RUN chmod +x swoole-tracker-install.sh \
 #    && ./swoole-tracker-install.sh \
