@@ -1,18 +1,24 @@
 <?php
 
 declare(strict_types=1);
-
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
 namespace App\Aspect;
 
 use App\Components\FileAdapter;
 use Hyperf\Di\Annotation\Aspect;
 use Hyperf\Di\Aop\AbstractAspect;
+use Hyperf\Di\Aop\ProceedingJoinPoint;
 use Hyperf\Tracer\SpanStarter;
 use Hyperf\Tracer\SpanTagManager;
 use Hyperf\Tracer\SwitchManager;
 use OpenTracing\Tracer;
-use Hyperf\Di\Aop\ProceedingJoinPoint;
-use Throwable;
 
 #[Aspect]
 class FileAdapterAspect extends AbstractAspect
@@ -37,7 +43,7 @@ class FileAdapterAspect extends AbstractAspect
 
         try {
             $result = $proceedingJoinPoint->process();
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $span->setTag('error', true);
             $span->log(['message', $e->getMessage(), 'code' => $e->getCode(), 'stacktrace' => $e->getTraceAsString()]);
             throw $e;

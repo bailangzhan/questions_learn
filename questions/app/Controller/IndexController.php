@@ -15,14 +15,11 @@ use App\Components\FileAdapter;
 use App\Service\IndexService;
 use App\Service\Instance\JwtInstance;
 use App\Service\UserService;
-use Hyperf\Config\Config;
 use Hyperf\Context\Context;
-use Hyperf\Contract\ConfigInterface;
 use Hyperf\DbConnection\Db;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Elasticsearch\ClientBuilderFactory;
 use Hyperf\HttpServer\Annotation\AutoController;
-use Hyperf\Utils\ApplicationContext;
 use Hyperf\Utils\Coroutine;
 
 #[AutoController]

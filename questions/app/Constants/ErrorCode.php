@@ -100,4 +100,14 @@ class ErrorCode extends AbstractConstants
      * @Message("question.not_exists")
      */
     public const QUESTION_NOT_EXISTS = 300003;
+
+    /**
+     * @Message("question.answer_not_exists")
+     */
+    public const QUESTION_ANSWER_NOT_EXISTS = 300004;
+
+    /**
+     * @Message("question.answer_supported")
+     */
+    public const QUESTION_ANSWER_SUPPORTED = 300005;
 }

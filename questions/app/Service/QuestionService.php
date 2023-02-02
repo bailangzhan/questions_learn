@@ -207,6 +207,7 @@ class QuestionService extends Service
 
     /**
      * 处理列表数据.
+     * @param mixed $data
      * @return mixed
      */
     protected function listFormatter($data)

@@ -22,4 +22,6 @@ class KeyConstants extends AbstractConstants
     public const QUESTION_HOT_RANK = 'question_hot';
 
     public const QUESTION_INFO = 'question:%d';
+
+    public const ANSWER_SUPPORT = 'answer:support:%d';
 }
