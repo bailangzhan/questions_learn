@@ -36,8 +36,8 @@ return [
                 'headers' => [
                     'x-sls-otel-project' => 'question-api',
                     'x-sls-otel-instance-id' => 'qapi',
-                    'x-sls-otel-ak-id' => 'LTAI5tGbUY6r3ztWh4GqX23P',
-                    'x-sls-otel-ak-secret' => 'SmnQRy6RgLoX757cXLjnwnH8B774zp',
+                    'x-sls-otel-ak-id' => 'xxx',
+                    'x-sls-otel-ak-secret' => 'xxx',
                 ],
             ],
             'sampler' => BinarySampler::createAsAlwaysSample(),
