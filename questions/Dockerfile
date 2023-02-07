@@ -5,6 +5,7 @@
 # @contact  group@hyperf.io
 # @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
 
+#FROM hyperf/hyperf:8.0-alpine-v3.16-swoole-v5.0
 FROM hyperf/hyperf:8.0-alpine-v3.15-swoole
 LABEL maintainer="Hyperf Developers <group@hyperf.io>" version="1.0" license="MIT" app.name="api"
 
@@ -76,4 +77,5 @@ RUN composer install --no-dev -o && php bin/hyperf.php
 
 EXPOSE 9501
 
-ENTRYPOINT ["php", "/opt/www/bin/hyperf.php", "start"]
+#ENTRYPOINT ["php", "/opt/www/bin/hyperf.php", "start"]
+ENTRYPOINT ["sh", "/opt/www/.build/entrypoint.sh"]
